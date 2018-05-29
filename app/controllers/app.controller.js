@@ -11,10 +11,12 @@ var configData = require('../assets/config/app-config');
 
 
 exports.generateCode = function(req, res) {
-    var dir = '/home/hmspl/Documents/myproj';
-   
+    // var dir = '/home/hmspl/Documents/myproj';
+    console.log("req",);
+    var dir = 'D:/\dev/\projects';
+    let reqObj = req.body;
     async.forEach(appData.appInfo,function(item,loopCb){
-        if(makeDir(dir,item)==undefined){
+        if(makeDir(dir,item,reqObj)==undefined){
             loopCb();
         }
     },function(err,resp){
@@ -37,25 +39,25 @@ exports.generateCode = function(req, res) {
 
 
 
-var makeDir = function(dir,data){
+var makeDir = function(dir,data,reqObj){
     if (typeof data == typeof {} && Array.isArray(data) == true) {
         for(let obj of data){
             // return makeDir(dir, obj)   
-            makeDir(dir, obj)   
+            makeDir(dir, obj,reqObj)   
         }
         
     }else if(typeof data == typeof {} && Array.isArray(data) == false){
-        createIt(dir,data,function(err,resp){
+        createIt(dir,data,reqObj,function(err,resp){
             if(resp.hasOwnProperty('dir')){
                 // return makeDir(dir+'/'+resp.name, resp.dir)   
-                makeDir(dir+'/'+resp.name, resp.dir)   
+                makeDir(dir+'/'+resp.name, resp.dir,reqObj)   
             }
         })
     }
     
 }
 
-var createIt = function(dir,obj,fbCb){
+var createIt = function(dir,obj,reqObj,fbCb){
     var dirData = dir+'/'+obj.name;
     async.waterfall([
         function(callback){
@@ -72,7 +74,7 @@ var createIt = function(dir,obj,fbCb){
                 async.eachSeries(obj.file, function iterator(item, loopCb) {
                     if(item.name){
                         if(item.hasOwnProperty('type')){
-                            let content = nunjucks.render(path.resolve(__dirname,configData[item.type]['template']));
+                            let content = nunjucks.render(path.resolve(__dirname,configData[item.type]['template']),reqObj);
                             fs.writeFile(dirData+"/"+item.name, content, function(err,resp){
                                 loopCb();
                                 

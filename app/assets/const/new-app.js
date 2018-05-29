@@ -1,7 +1,7 @@
 let appData = {
     appInfo :[ 
         {
-        "name":"sdp",
+        "name":"generate",
         "dir":[
             {
                 "name":"src",
