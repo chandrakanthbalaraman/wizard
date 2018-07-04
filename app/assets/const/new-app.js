@@ -52,19 +52,6 @@ let appData = {
                             },
                             {
                                 "name":"main",
-                                "dir":[
-                                    {
-                                        "name":"auth-layout"
-                                        
-                                       
-                                    },
-                                    {
-                                        "name":"main-layout"
-                                        
-                                       
-                                    }
-                                ]
-                               
                             }
                            
                         ],
@@ -221,6 +208,23 @@ let appData = {
                 "name":"README.md"
             }
         ]
+        }
+    ],
+    basicLayout:[
+        
+        {
+            "dir":[
+                {
+                    "name":"basic-layout"
+                    
+                   
+                },
+                {
+                    "name":"main-layout"
+                    
+                   
+                }
+            ]
         }
     ]
 }

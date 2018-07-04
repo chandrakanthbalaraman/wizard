@@ -4,4 +4,5 @@ module.exports = function(app) {
 
     // Create a new Note
     app.post('/generate', appController.generateCode);
+    app.post('/generate-layout', appController.generateLayout);
 }
