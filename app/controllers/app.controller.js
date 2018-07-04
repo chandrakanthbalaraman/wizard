@@ -15,6 +15,9 @@ exports.generateCode = function(req, res) {
     // var dir = '/home/hmspl/Documents/myproj';
     var dir = 'D:/\dev/\projects';
     let reqObj = req.body;
+    if(reqObj.appName){
+        appData.appInfo[0].name  = reqObj.appName
+    }
     async.forEach(appData.appInfo,function(item,loopCb){
         if(makeDir(dir,item,reqObj)==undefined){
             loopCb();

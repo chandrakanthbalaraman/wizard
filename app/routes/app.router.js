@@ -1,8 +1,9 @@
 module.exports = function(app) {
 
     var appController = require('../controllers/app.controller.js');
+    
 
     // Create a new Note
-    app.post('/generate', appController.generateCode);
-    app.post('/generate-layout', appController.generateLayout);
+    app.post('/api/v1/generate', appController.generateCode);
+    app.post('/api/v1/generate-layout', appController.generateLayout);
 }
